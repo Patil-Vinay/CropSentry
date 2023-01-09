@@ -1,0 +1,16 @@
+# colcon
+build/
+install/
+log/
+
+__pycache__/
+*.pyc
+
+# editor
+.vscode/
+.idea/
+
+# recordings
+*.bag
+*.db3
+*.mp4
