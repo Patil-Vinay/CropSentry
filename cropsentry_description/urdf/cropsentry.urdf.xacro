@@ -1,0 +1,873 @@
+<?xml version="1.0" ?>
+<robot name="cropsentry" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- CropSentry robot. Exported from Fusion 360 with fusion2urdf and edited by hand.
+     width joints move the side rails out, lift joints raise the body.
+     right side follows the left side through mimic. -->
+
+<xacro:include filename="$(find cropsentry_description)/urdf/materials.xacro" />
+
+<!-- meshes are in mm -->
+<xacro:property name="mesh_scale" value="0.001 0.001 0.001" />
+
+<!-- empty root link, KDL does not like inertia on the root -->
+<link name="base_footprint"/>
+
+<joint name="base_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+</joint>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.0028997388406951535 0.002000864602341355 0.39394531511524705" rpy="0 0 0"/>
+    <mass value="9.078029323053778"/>
+    <inertia ixx="0.324068" iyy="0.28302" izz="0.4143" ixy="-1e-06" iyz="0.000866" ixz="-8e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/base_link__frame.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="aluminium"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/base_link__actuators.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="actuator_grey"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/base_link__box.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="oak_wood"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/base_link__box_lid.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="oak_wood_lid"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/base_link.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera_front_link_1">
+  <inertial>
+    <origin xyz="-0.02156696021487378 -3.8905486492504804e-07 0.014112258248214049" rpy="0 0 0"/>
+    <mass value="0.01262884757300851"/>
+    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="-0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.242705 -0.000996 -0.327144" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/camera_front_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="camera_black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.242705 -0.000996 -0.327144" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/camera_front_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera_rear_link_1">
+  <inertial>
+    <origin xyz="0.021904998449109037 -1.9220681589078928e-07 0.013582461130764778" rpy="0 0 0"/>
+    <mass value="0.01262884757300851"/>
+    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="0.0" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.248889 -0.0005 -0.328849" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/camera_rear_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="camera_black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.248889 -0.0005 -0.328849" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/camera_rear_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_side_rail_1">
+  <inertial>
+    <origin xyz="-0.0032508005913867736 -0.01092348710965313 -0.009961939764093874" rpy="0 0 0"/>
+    <mass value="1.4128217094982853"/>
+    <inertia ixx="0.003679" iyy="0.03178" izz="0.031741" ixy="2e-06" iyz="0.000156" ixz="-5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_rail__frame.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="aluminium"/>
+  </visual>
+  <visual>
+    <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_rail__gantry.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="gantry_black"/>
+  </visual>
+  <visual>
+    <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_rail__rods.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="chrome"/>
+  </visual>
+  <collision>
+    <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_rail_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_side_rail_1">
+  <inertial>
+    <origin xyz="-0.003019650405096919 0.009579246964560778 -0.009961939764095207" rpy="0 0 0"/>
+    <mass value="1.4128217094982853"/>
+    <inertia ixx="0.003733" iyy="0.03178" izz="0.031795" ixy="3e-06" iyz="-0.000157" ixz="1.1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_rail__frame.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="aluminium"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_rail__gantry.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="gantry_black"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_rail__rods.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="chrome"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_rail_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_side_module_1">
+  <inertial>
+    <origin xyz="-0.002841756386240688 -0.06449525605428841 0.1688535964038643" rpy="0 0 0"/>
+    <mass value="9.085055226573818"/>
+    <inertia ixx="0.120899" iyy="0.413131" izz="0.313186" ixy="-4.8e-05" iyz="-0.008334" ixz="4.1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__side_plate.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="cherry_wood"/>
+  </visual>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__sprayer.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="water_blue"/>
+  </visual>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__actuators.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="actuator_grey"/>
+  </visual>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__frame.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="aluminium"/>
+  </visual>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__motors.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="motor_steel"/>
+  </visual>
+  <collision>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_side_module_1">
+  <inertial>
+    <origin xyz="-0.0027566210258044054 0.0642226774653018 0.1688535964038634" rpy="0 0 0"/>
+    <mass value="9.085055226573818"/>
+    <inertia ixx="0.12084" iyy="0.413159" izz="0.313155" ixy="1.5e-05" iyz="0.008322" ixz="5.6e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__side_plate.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="cherry_wood"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__sprayer.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="water_blue"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__actuators.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="actuator_grey"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__frame.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="aluminium"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__motors.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="motor_steel"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_track_1">
+  <inertial>
+    <origin xyz="-0.006248661598620844 -6.661338147750939e-16 0.09493273360525734" rpy="0 0 0"/>
+    <mass value="0.40112438725828753"/>
+    <inertia ixx="0.001939" iyy="0.014875" izz="0.013099" ixy="0.0" iyz="-0.0" ixz="1.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_track__belt.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="rubber_black"/>
+  </visual>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_track__treads.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="tread_black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_track_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_track_1">
+  <inertial>
+    <origin xyz="0.006248661598621838 3.547162563677375e-14 0.09493273360525625" rpy="0 0 0"/>
+    <mass value="0.40112438725828753"/>
+    <inertia ixx="0.001939" iyy="0.014875" izz="0.013099" ixy="0.0" iyz="-0.0" ixz="-1.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_track__belt.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="rubber_black"/>
+  </visual>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_track__treads.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="tread_black"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_track_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera_sprayer_left_link_1">
+  <inertial>
+    <origin xyz="-0.022715497403238083 -1.9220681701792586e-07 0.012179634118250404" rpy="0 0 0"/>
+    <mass value="0.01262884757300851"/>
+    <inertia ixx="1e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="-0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.320595 -0.26632 -0.235227" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/camera_sprayer_left_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="camera_black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.320595 -0.26632 -0.235227" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/camera_sprayer_left_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera_sprayer_right_link_1">
+  <inertial>
+    <origin xyz="-0.022715497403238305 -1.922068169624147e-07 0.012179634118249183" rpy="0 0 0"/>
+    <mass value="0.01262884757300851"/>
+    <inertia ixx="1e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="-0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.320595 0.26548 -0.235227" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/camera_sprayer_right_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="camera_black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.320595 0.26548 -0.235227" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/camera_sprayer_right_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_link_1">
+  <inertial>
+    <origin xyz="-0.012059549430187222 0.0005320976527575695 -0.005614901098481284" rpy="0 0 0"/>
+    <mass value="0.07308529026198554"/>
+    <inertia ixx="3.2e-05" iyy="6.2e-05" izz="7.2e-05" ixy="-1e-06" iyz="-0.0" ixz="-7e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.177553 -0.000438 -0.617" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/lidar_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="lidar_dark"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.177553 -0.000438 -0.617" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/lidar_link_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_left_sprocket_1">
+  <inertial>
+    <origin xyz="4.3222212595367404e-05 -7.771561172376096e-16 -3.588501754102358e-05" rpy="0 0 0"/>
+    <mass value="0.17184803025851375"/>
+    <inertia ixx="0.000122" iyy="0.000137" izz="0.000122" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.227011 -0.3199 -0.111374" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_left_sprocket_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="nylon_white"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.227011 -0.3199 -0.111374" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_left_sprocket_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_left_sprocket_1">
+  <inertial>
+    <origin xyz="4.322221259406289e-05 -1.7208456881689926e-15 -3.588501754112072e-05" rpy="0 0 0"/>
+    <mass value="0.17184803025851375"/>
+    <inertia ixx="0.000122" iyy="0.000137" izz="0.000122" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.233289 -0.3199 -0.111474" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_left_sprocket_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="nylon_white"/>
+  </visual>
+  <collision>
+    <origin xyz="0.233289 -0.3199 -0.111474" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_left_sprocket_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_right_sprocket_1">
+  <inertial>
+    <origin xyz="-4.322221259339676e-05 1.9262369477246466e-14 -3.588501754206441e-05" rpy="0 0 0"/>
+    <mass value="0.17184803025851375"/>
+    <inertia ixx="0.000122" iyy="0.000137" izz="0.000122" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.233289 0.3199 -0.111474" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_right_sprocket_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="nylon_white"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.233289 0.3199 -0.111474" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_right_sprocket_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_right_sprocket_1">
+  <inertial>
+    <origin xyz="-4.322221259356329e-05 5.473399511402022e-14 -3.588501754220319e-05" rpy="0 0 0"/>
+    <mass value="0.17184803025851375"/>
+    <inertia ixx="0.000122" iyy="0.000137" izz="0.000122" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.227011 0.3199 -0.111374" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_right_sprocket_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="nylon_white"/>
+  </visual>
+  <collision>
+    <origin xyz="0.227011 0.3199 -0.111374" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_right_sprocket_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_left_road_wheel_1">
+  <inertial>
+    <origin xyz="-3.2201240140763976e-05 -0.004177355519237036 0.00015073786728982824" rpy="0 0 0"/>
+    <mass value="0.3123087999601298"/>
+    <inertia ixx="0.000299" iyy="0.000472" izz="0.000301" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.123669 -0.3199 -0.060034" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_left_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.123669 -0.3199 -0.060034" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_left_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="middle_left_road_wheel_1">
+  <inertial>
+    <origin xyz="3.2806168714016523e-07 -0.004164305949009239 2.686881463570545e-07" rpy="0 0 0"/>
+    <mass value="0.3132874733976082"/>
+    <inertia ixx="0.000302" iyy="0.000475" izz="0.000302" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.002923 -0.3199 -0.061329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/middle_left_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="0.002923 -0.3199 -0.061329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/middle_left_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_left_road_wheel_1">
+  <inertial>
+    <origin xyz="4.85011332533869e-05 -0.004183389697617779 0.00021924873762715208" rpy="0 0 0"/>
+    <mass value="0.311858321485724"/>
+    <inertia ixx="0.000298" iyy="0.000471" izz="0.000301" ixy="-0.0" iyz="-0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.128576 -0.3199 -0.061452" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_left_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="0.128576 -0.3199 -0.061452" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_left_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_right_road_wheel_1">
+  <inertial>
+    <origin xyz="-4.850113325172156e-05 0.004183389697643203 0.00021924873762602798" rpy="0 0 0"/>
+    <mass value="0.311858321485724"/>
+    <inertia ixx="0.000298" iyy="0.000471" izz="0.000301" ixy="-0.0" iyz="0.0" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.128576 0.3199 -0.061452" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_right_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.128576 0.3199 -0.061452" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_right_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="middle_right_road_wheel_1">
+  <inertial>
+    <origin xyz="-3.28061685932364e-07 0.004164305949044378 2.6868814528846485e-07" rpy="0 0 0"/>
+    <mass value="0.3132874733976082"/>
+    <inertia ixx="0.000302" iyy="0.000475" izz="0.000302" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.002923 0.3199 -0.061329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/middle_right_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.002923 0.3199 -0.061329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/middle_right_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_right_road_wheel_1">
+  <inertial>
+    <origin xyz="3.2201240141971343e-05 0.0041773555192822776 0.00015073786728869026" rpy="0 0 0"/>
+    <mass value="0.3123087999601298"/>
+    <inertia ixx="0.000299" iyy="0.000472" izz="0.000301" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.123669 0.3199 -0.060034" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_right_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="0.123669 0.3199 -0.060034" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_right_road_wheel_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_left_roller_1">
+  <inertial>
+    <origin xyz="-1.719383129969443e-07 -0.0027551020408171367 2.6868814642644345e-07" rpy="0 0 0"/>
+    <mass value="0.08697499261463347"/>
+    <inertia ixx="3.4e-05" iyy="3.2e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.062099 -0.3199 -0.136329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_left_roller_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.062099 -0.3199 -0.136329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_left_roller_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_left_roller_1">
+  <inertial>
+    <origin xyz="-1.7193831312878327e-07 -0.0027551020408171367 2.686881463986879e-07" rpy="0 0 0"/>
+    <mass value="0.08697499261463347"/>
+    <inertia ixx="3.4e-05" iyy="3.2e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.067944 -0.3199 -0.136329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_left_roller_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="0.067944 -0.3199 -0.136329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_left_roller_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_right_roller_1">
+  <inertial>
+    <origin xyz="1.7193831421125072e-07 0.002755102040846946 2.6868814539948715e-07" rpy="0 0 0"/>
+    <mass value="0.08697499261463347"/>
+    <inertia ixx="3.4e-05" iyy="3.2e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.067944 0.3199 -0.136329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_right_roller_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.067944 0.3199 -0.136329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/front_right_roller_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rear_right_roller_1">
+  <inertial>
+    <origin xyz="1.7193831405859505e-07 0.0027551020408573823 2.68688145343976e-07" rpy="0 0 0"/>
+    <mass value="0.08697499261463347"/>
+    <inertia ixx="3.4e-05" iyy="3.2e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.062099 0.3199 -0.136329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_right_roller_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="wheel_white"/>
+  </visual>
+  <collision>
+    <origin xyz="0.062099 0.3199 -0.136329" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/rear_right_roller_1.stl" scale="${mesh_scale}"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="camera_front_joint" type="fixed">
+  <origin xyz="0.242705 0.000996 0.327144" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="camera_front_link_1"/>
+</joint>
+
+<joint name="camera_rear_joint" type="fixed">
+  <origin xyz="-0.248889 0.0005 0.328849" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="camera_rear_link_1"/>
+</joint>
+
+<joint name="left_width_joint" type="prismatic">
+  <origin xyz="0 0.2416 0.2986" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_side_rail_1"/>
+  <axis xyz="0 1 0"/>
+  <limit lower="0" upper="0.09" effort="500" velocity="0.01"/>
+</joint>
+
+<joint name="right_width_joint" type="prismatic">
+  <origin xyz="0 -0.2406 0.2986" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_side_rail_1"/>
+  <axis xyz="0 -1 0"/>
+  <limit lower="0" upper="0.09" effort="500" velocity="0.01"/>
+  <mimic joint="left_width_joint" multiplier="1" offset="0"/>
+</joint>
+
+<joint name="left_lift_joint" type="prismatic">
+  <origin xyz="0 0.0783 -0.2986" rpy="0 0 0"/>
+  <parent link="left_side_rail_1"/>
+  <child link="left_side_module_1"/>
+  <axis xyz="0 0 -1"/>
+  <limit lower="0" upper="0.09" effort="500" velocity="0.01"/>
+</joint>
+
+<joint name="right_lift_joint" type="prismatic">
+  <origin xyz="0 -0.0793 -0.2986" rpy="0 0 0"/>
+  <parent link="right_side_rail_1"/>
+  <child link="right_side_module_1"/>
+  <axis xyz="0 0 -1"/>
+  <limit lower="0" upper="0.09" effort="500" velocity="0.01"/>
+  <mimic joint="left_lift_joint" multiplier="1" offset="0"/>
+</joint>
+
+<joint name="left_track_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="left_track_1"/>
+</joint>
+
+<joint name="right_track_joint" type="fixed">
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="right_track_1"/>
+</joint>
+
+<joint name="camera_sprayer_left_joint" type="fixed">
+  <origin xyz="0.320595 -0.05358 0.235227" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="camera_sprayer_left_link_1"/>
+</joint>
+
+<joint name="camera_sprayer_right_joint" type="fixed">
+  <origin xyz="0.320595 0.05442 0.235227" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="camera_sprayer_right_link_1"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="0.177553 0.000438 0.617" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_link_1"/>
+</joint>
+
+<joint name="front_left_sprocket_joint" type="continuous">
+  <origin xyz="0.227011 0 0.111374" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="front_left_sprocket_1"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<joint name="rear_left_sprocket_joint" type="continuous">
+  <origin xyz="-0.233289 0 0.111474" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="rear_left_sprocket_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_left_sprocket_joint" multiplier="1.0" offset="0"/>
+</joint>
+
+<joint name="front_right_sprocket_joint" type="continuous">
+  <origin xyz="0.233289 0 0.111474" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="front_right_sprocket_1"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<joint name="rear_right_sprocket_joint" type="continuous">
+  <origin xyz="-0.227011 0 0.111374" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="rear_right_sprocket_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_right_sprocket_joint" multiplier="1.0" offset="0"/>
+</joint>
+
+<joint name="front_left_road_wheel_joint" type="continuous">
+  <origin xyz="0.123669 0 0.060034" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="front_left_road_wheel_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_left_sprocket_joint" multiplier="1.17" offset="0"/>
+</joint>
+
+<joint name="middle_left_road_wheel_joint" type="continuous">
+  <origin xyz="-0.002923 0 0.061329" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="middle_left_road_wheel_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_left_sprocket_joint" multiplier="1.17" offset="0"/>
+</joint>
+
+<joint name="rear_left_road_wheel_joint" type="continuous">
+  <origin xyz="-0.128576 0 0.061452" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="rear_left_road_wheel_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_left_sprocket_joint" multiplier="1.17" offset="0"/>
+</joint>
+
+<joint name="front_right_road_wheel_joint" type="continuous">
+  <origin xyz="0.128576 0 0.061452" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="front_right_road_wheel_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_right_sprocket_joint" multiplier="1.17" offset="0"/>
+</joint>
+
+<joint name="middle_right_road_wheel_joint" type="continuous">
+  <origin xyz="0.002923 0 0.061329" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="middle_right_road_wheel_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_right_sprocket_joint" multiplier="1.17" offset="0"/>
+</joint>
+
+<joint name="rear_right_road_wheel_joint" type="continuous">
+  <origin xyz="-0.123669 0 0.060034" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="rear_right_road_wheel_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_right_sprocket_joint" multiplier="1.17" offset="0"/>
+</joint>
+
+<joint name="front_left_roller_joint" type="continuous">
+  <origin xyz="0.062099 0 0.136329" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="front_left_roller_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_left_sprocket_joint" multiplier="2.34" offset="0"/>
+</joint>
+
+<joint name="rear_left_roller_joint" type="continuous">
+  <origin xyz="-0.067944 0 0.136329" rpy="0 0 0"/>
+  <parent link="left_side_module_1"/>
+  <child link="rear_left_roller_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_left_sprocket_joint" multiplier="2.34" offset="0"/>
+</joint>
+
+<joint name="front_right_roller_joint" type="continuous">
+  <origin xyz="0.067944 0 0.136329" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="front_right_roller_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_right_sprocket_joint" multiplier="2.34" offset="0"/>
+</joint>
+
+<joint name="rear_right_roller_joint" type="continuous">
+  <origin xyz="-0.062099 0 0.136329" rpy="0 0 0"/>
+  <parent link="right_side_module_1"/>
+  <child link="rear_right_roller_1"/>
+  <axis xyz="0 1 0"/>
+  <mimic joint="front_right_sprocket_joint" multiplier="2.34" offset="0"/>
+</joint>
+
+</robot>
