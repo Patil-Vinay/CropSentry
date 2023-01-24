@@ -6,6 +6,7 @@
      right side follows the left side through mimic. -->
 
 <xacro:include filename="$(find cropsentry_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find cropsentry_description)/urdf/cropsentry.gazebo.xacro" />
 
 <!-- meshes are in mm -->
 <xacro:property name="mesh_scale" value="0.001 0.001 0.001" />
@@ -291,10 +292,11 @@
     </geometry>
     <material name="tread_black"/>
   </visual>
+  <!-- flat box under the track, the belt mesh made the robot creep in Gazebo -->
   <collision>
-    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <origin xyz="-0.0065 0 0.086" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://cropsentry_description/meshes/left_track_1.stl" scale="${mesh_scale}"/>
+      <box size="0.587 0.05 0.172"/>
     </geometry>
   </collision>
 </link>
@@ -319,10 +321,11 @@
     </geometry>
     <material name="tread_black"/>
   </visual>
+  <!-- flat box under the track, the belt mesh made the robot creep in Gazebo -->
   <collision>
-    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <origin xyz="0.0065 0 0.086" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://cropsentry_description/meshes/right_track_1.stl" scale="${mesh_scale}"/>
+      <box size="0.587 0.05 0.172"/>
     </geometry>
   </collision>
 </link>
@@ -382,10 +385,11 @@
     </geometry>
     <material name="lidar_dark"/>
   </visual>
+  <!-- box instead of the lidar mesh, the mesh is too heavy for collision -->
   <collision>
-    <origin xyz="-0.177553 -0.000438 -0.617" rpy="0 0 0"/>
+    <origin xyz="-0.013 0 -0.0035" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://cropsentry_description/meshes/lidar_link_1.stl" scale="${mesh_scale}"/>
+      <box size="0.097 0.071 0.053"/>
     </geometry>
   </collision>
 </link>
