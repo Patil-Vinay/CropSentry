@@ -4,7 +4,7 @@ project(cropsentry_description)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY urdf meshes launch rviz
+  DIRECTORY urdf meshes materials launch rviz
   DESTINATION share/${PROJECT_NAME}
 )
 

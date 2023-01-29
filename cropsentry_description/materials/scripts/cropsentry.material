@@ -1,0 +1,59 @@
+// wood for the box and side plates in Gazebo.
+// oak.jpg and cherry.jpg are the Gazebo wood.jpg grain recoloured.
+
+material CropSentry/Oak
+{
+  technique
+  {
+    pass
+    {
+      ambient 1.0 1.0 1.0 1.0
+      diffuse 1.0 1.0 1.0 1.0
+      specular 0.1 0.1 0.1 1.0 10.0
+
+      texture_unit
+      {
+        texture oak.jpg
+        filtering trilinear
+      }
+    }
+  }
+}
+
+material CropSentry/OakLid
+{
+  technique
+  {
+    pass
+    {
+      ambient 1.08 1.08 1.08 1.0
+      diffuse 1.08 1.08 1.08 1.0
+      specular 0.1 0.1 0.1 1.0 10.0
+
+      texture_unit
+      {
+        texture oak.jpg
+        filtering trilinear
+      }
+    }
+  }
+}
+
+material CropSentry/Cherry
+{
+  technique
+  {
+    pass
+    {
+      ambient 1.0 1.0 1.0 1.0
+      diffuse 1.0 1.0 1.0 1.0
+      specular 0.1 0.1 0.1 1.0 10.0
+
+      texture_unit
+      {
+        texture cherry.jpg
+        filtering trilinear
+      }
+    }
+  }
+}

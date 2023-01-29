@@ -33,27 +33,6 @@
     </geometry>
     <material name="aluminium"/>
   </visual>
-  <visual>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/base_link__actuators.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="actuator_grey"/>
-  </visual>
-  <visual>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/base_link__box.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="oak_wood"/>
-  </visual>
-  <visual>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/base_link__box_lid.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="oak_wood_lid"/>
-  </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
@@ -61,6 +40,62 @@
     </geometry>
   </collision>
 </link>
+<link name="base_actuators_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/base_link__actuators.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="actuator_grey"/>
+  </visual>
+</link>
+
+<joint name="base_actuators_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="base_actuators_link"/>
+</joint>
+
+<link name="box_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0028 0.0006 0.4586" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.4296 0.4164 0.25"/>
+    </geometry>
+    <material name="oak_wood"/>
+  </visual>
+</link>
+
+<joint name="box_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="box_link"/>
+</joint>
+
+<link name="box_lid_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0028 0.0006 0.5852" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.4297 0.4164 0.003"/>
+    </geometry>
+    <material name="oak_wood_lid"/>
+  </visual>
+</link>
+
+<joint name="box_lid_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="box_lid_link"/>
+</joint>
 
 <link name="camera_front_link_1">
   <inertial>
@@ -117,20 +152,6 @@
     </geometry>
     <material name="aluminium"/>
   </visual>
-  <visual>
-    <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/left_side_rail__gantry.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="gantry_black"/>
-  </visual>
-  <visual>
-    <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/left_side_rail__rods.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="chrome"/>
-  </visual>
   <collision>
     <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
     <geometry>
@@ -138,6 +159,43 @@
     </geometry>
   </collision>
 </link>
+<link name="left_gantry_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_rail__gantry.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="gantry_black"/>
+  </visual>
+</link>
+
+<joint name="left_gantry_joint" type="fixed">
+  <parent link="left_side_rail_1"/>
+  <child link="left_gantry_link"/>
+</joint>
+
+<link name="left_rods_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.2416 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_rail__rods.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="chrome"/>
+  </visual>
+</link>
+
+<joint name="left_rods_joint" type="fixed">
+  <parent link="left_side_rail_1"/>
+  <child link="left_rods_link"/>
+</joint>
 
 <link name="right_side_rail_1">
   <inertial>
@@ -152,20 +210,6 @@
     </geometry>
     <material name="aluminium"/>
   </visual>
-  <visual>
-    <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/right_side_rail__gantry.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="gantry_black"/>
-  </visual>
-  <visual>
-    <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/right_side_rail__rods.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="chrome"/>
-  </visual>
   <collision>
     <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
     <geometry>
@@ -173,6 +217,43 @@
     </geometry>
   </collision>
 </link>
+<link name="right_gantry_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_rail__gantry.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="gantry_black"/>
+  </visual>
+</link>
+
+<joint name="right_gantry_joint" type="fixed">
+  <parent link="right_side_rail_1"/>
+  <child link="right_gantry_link"/>
+</joint>
+
+<link name="right_rods_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.2406 -0.2986" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_rail__rods.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="chrome"/>
+  </visual>
+</link>
+
+<joint name="right_rods_joint" type="fixed">
+  <parent link="right_side_rail_1"/>
+  <child link="right_rods_link"/>
+</joint>
 
 <link name="left_side_module_1">
   <inertial>
@@ -183,37 +264,9 @@
   <visual>
     <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://cropsentry_description/meshes/left_side_module__side_plate.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="cherry_wood"/>
-  </visual>
-  <visual>
-    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/left_side_module__sprayer.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="water_blue"/>
-  </visual>
-  <visual>
-    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/left_side_module__actuators.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="actuator_grey"/>
-  </visual>
-  <visual>
-    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
-    <geometry>
       <mesh filename="package://cropsentry_description/meshes/left_side_module__frame.stl" scale="${mesh_scale}"/>
     </geometry>
     <material name="aluminium"/>
-  </visual>
-  <visual>
-    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/left_side_module__motors.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="motor_steel"/>
   </visual>
   <collision>
     <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
@@ -222,6 +275,100 @@
     </geometry>
   </collision>
 </link>
+<link name="left_side_plate_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0032 -0.0376 0.1487" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.5781 0.008 0.2339"/>
+    </geometry>
+    <material name="cherry_wood"/>
+  </visual>
+</link>
+
+<joint name="left_side_plate_joint" type="fixed">
+  <parent link="left_side_module_1"/>
+  <child link="left_side_plate_link"/>
+</joint>
+
+<link name="left_sprayer_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__sprayer.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="water_blue"/>
+  </visual>
+</link>
+
+<joint name="left_sprayer_joint" type="fixed">
+  <parent link="left_side_module_1"/>
+  <child link="left_sprayer_link"/>
+</joint>
+
+<link name="left_lift_actuator_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__actuators.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="actuator_grey"/>
+  </visual>
+</link>
+
+<joint name="left_lift_actuator_joint" type="fixed">
+  <parent link="left_side_module_1"/>
+  <child link="left_lift_actuator_link"/>
+</joint>
+
+<link name="left_motors_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__motors.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="motor_grey"/>
+  </visual>
+</link>
+
+<joint name="left_motors_joint" type="fixed">
+  <parent link="left_side_module_1"/>
+  <child link="left_motors_link"/>
+</joint>
+
+<link name="left_couplers_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/left_side_module__couplers.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="coupler_orange"/>
+  </visual>
+</link>
+
+<joint name="left_couplers_joint" type="fixed">
+  <parent link="left_side_module_1"/>
+  <child link="left_couplers_link"/>
+</joint>
 
 <link name="right_side_module_1">
   <inertial>
@@ -232,37 +379,9 @@
   <visual>
     <origin xyz="0 0.3199 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://cropsentry_description/meshes/right_side_module__side_plate.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="cherry_wood"/>
-  </visual>
-  <visual>
-    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/right_side_module__sprayer.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="water_blue"/>
-  </visual>
-  <visual>
-    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/right_side_module__actuators.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="actuator_grey"/>
-  </visual>
-  <visual>
-    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
-    <geometry>
       <mesh filename="package://cropsentry_description/meshes/right_side_module__frame.stl" scale="${mesh_scale}"/>
     </geometry>
     <material name="aluminium"/>
-  </visual>
-  <visual>
-    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="package://cropsentry_description/meshes/right_side_module__motors.stl" scale="${mesh_scale}"/>
-    </geometry>
-    <material name="motor_steel"/>
   </visual>
   <collision>
     <origin xyz="0 0.3199 0" rpy="0 0 0"/>
@@ -271,6 +390,100 @@
     </geometry>
   </collision>
 </link>
+<link name="right_side_plate_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0032 0.0374 0.1487" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.5781 0.008 0.2339"/>
+    </geometry>
+    <material name="cherry_wood"/>
+  </visual>
+</link>
+
+<joint name="right_side_plate_joint" type="fixed">
+  <parent link="right_side_module_1"/>
+  <child link="right_side_plate_link"/>
+</joint>
+
+<link name="right_sprayer_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__sprayer.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="water_blue"/>
+  </visual>
+</link>
+
+<joint name="right_sprayer_joint" type="fixed">
+  <parent link="right_side_module_1"/>
+  <child link="right_sprayer_link"/>
+</joint>
+
+<link name="right_lift_actuator_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__actuators.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="actuator_grey"/>
+  </visual>
+</link>
+
+<joint name="right_lift_actuator_joint" type="fixed">
+  <parent link="right_side_module_1"/>
+  <child link="right_lift_actuator_link"/>
+</joint>
+
+<link name="right_motors_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__motors.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="motor_grey"/>
+  </visual>
+</link>
+
+<joint name="right_motors_joint" type="fixed">
+  <parent link="right_side_module_1"/>
+  <child link="right_motors_link"/>
+</joint>
+
+<link name="right_couplers_link">
+  <inertial>
+    <mass value="0.1"/>
+    <inertia ixx="1e-04" iyy="1e-04" izz="1e-04" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0.3199 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cropsentry_description/meshes/right_side_module__couplers.stl" scale="${mesh_scale}"/>
+    </geometry>
+    <material name="coupler_orange"/>
+  </visual>
+</link>
+
+<joint name="right_couplers_joint" type="fixed">
+  <parent link="right_side_module_1"/>
+  <child link="right_couplers_link"/>
+</joint>
 
 <link name="left_track_1">
   <inertial>

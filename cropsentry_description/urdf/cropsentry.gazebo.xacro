@@ -1,35 +1,83 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<!-- Gazebo 11 uses one material per link, so these are kept simple.
-     cameras, lidar and tracks are merged into their parent links by Gazebo. -->
+<!-- Gazebo 11 gives one material to a whole link, so every coloured part
+     is its own link in the URDF. Gazebo merges the fixed links back but keeps
+     each part's colour. the box and side plates use a wood texture. -->
 
-<xacro:macro name="gz_link" params="link material mu">
+<xacro:macro name="gz_colour" params="link rgba">
   <gazebo reference="${link}">
-    <material>${material}</material>
+    <visual>
+      <material>
+        <ambient>${rgba}</ambient>
+        <diffuse>${rgba}</diffuse>
+        <specular>0.2 0.2 0.2 1</specular>
+      </material>
+    </visual>
+  </gazebo>
+</xacro:macro>
+
+<xacro:macro name="gz_wood" params="link name">
+  <gazebo reference="${link}">
+    <visual>
+      <material>
+        <script>
+          <uri>model://cropsentry_description/materials/scripts</uri>
+          <uri>model://cropsentry_description/materials/textures</uri>
+          <name>${name}</name>
+        </script>
+      </material>
+    </visual>
+  </gazebo>
+</xacro:macro>
+
+<xacro:macro name="gz_friction" params="link mu">
+  <gazebo reference="${link}">
     <mu1>${mu}</mu1>
     <mu2>${mu}</mu2>
   </gazebo>
 </xacro:macro>
 
-<xacro:gz_link link="base_link" material="Gazebo/Grey" mu="0.2"/>
-<xacro:gz_link link="left_side_rail_1" material="Gazebo/Grey" mu="0.2"/>
-<xacro:gz_link link="right_side_rail_1" material="Gazebo/Grey" mu="0.2"/>
-<xacro:gz_link link="left_side_module_1" material="Gazebo/DarkGrey" mu="1.0"/>
-<xacro:gz_link link="right_side_module_1" material="Gazebo/DarkGrey" mu="1.0"/>
+<!-- body -->
+<xacro:gz_colour link="base_link" rgba="${aluminium_rgba}"/>
+<xacro:gz_colour link="base_actuators_link" rgba="${actuator_rgba}"/>
+<xacro:gz_wood link="box_link" name="CropSentry/Oak"/>
+<xacro:gz_wood link="box_lid_link" name="CropSentry/OakLid"/>
+<xacro:gz_colour link="camera_front_link_1" rgba="${camera_rgba}"/>
+<xacro:gz_colour link="camera_rear_link_1" rgba="${camera_rgba}"/>
+<xacro:gz_colour link="lidar_link_1" rgba="${lidar_rgba}"/>
 
-<xacro:macro name="gz_wheels" params="side">
-  <xacro:gz_link link="front_${side}_sprocket_1" material="Gazebo/White" mu="1.0"/>
-  <xacro:gz_link link="rear_${side}_sprocket_1" material="Gazebo/White" mu="1.0"/>
-  <xacro:gz_link link="front_${side}_road_wheel_1" material="Gazebo/White" mu="1.0"/>
-  <xacro:gz_link link="middle_${side}_road_wheel_1" material="Gazebo/White" mu="1.0"/>
-  <xacro:gz_link link="rear_${side}_road_wheel_1" material="Gazebo/White" mu="1.0"/>
-  <xacro:gz_link link="front_${side}_roller_1" material="Gazebo/White" mu="1.0"/>
-  <xacro:gz_link link="rear_${side}_roller_1" material="Gazebo/White" mu="1.0"/>
+<xacro:macro name="gz_side" params="side">
+  <xacro:gz_colour link="${side}_side_rail_1" rgba="${aluminium_rgba}"/>
+  <xacro:gz_colour link="${side}_gantry_link" rgba="${gantry_rgba}"/>
+  <xacro:gz_colour link="${side}_rods_link" rgba="${chrome_rgba}"/>
+  <xacro:gz_colour link="${side}_side_module_1" rgba="${aluminium_rgba}"/>
+  <xacro:gz_wood link="${side}_side_plate_link" name="CropSentry/Cherry"/>
+  <xacro:gz_colour link="${side}_sprayer_link" rgba="${water_rgba}"/>
+  <xacro:gz_colour link="${side}_lift_actuator_link" rgba="${actuator_rgba}"/>
+  <xacro:gz_colour link="${side}_motors_link" rgba="${motor_rgba}"/>
+  <xacro:gz_colour link="${side}_couplers_link" rgba="${coupler_rgba}"/>
+  <xacro:gz_colour link="${side}_track_1" rgba="${rubber_rgba}"/>
+  <xacro:gz_colour link="camera_sprayer_${side}_link_1" rgba="${camera_rgba}"/>
+  <xacro:gz_colour link="front_${side}_sprocket_1" rgba="${nylon_rgba}"/>
+  <xacro:gz_colour link="rear_${side}_sprocket_1" rgba="${nylon_rgba}"/>
+  <xacro:gz_colour link="front_${side}_road_wheel_1" rgba="${wheel_rgba}"/>
+  <xacro:gz_colour link="middle_${side}_road_wheel_1" rgba="${wheel_rgba}"/>
+  <xacro:gz_colour link="rear_${side}_road_wheel_1" rgba="${wheel_rgba}"/>
+  <xacro:gz_colour link="front_${side}_roller_1" rgba="${wheel_rgba}"/>
+  <xacro:gz_colour link="rear_${side}_roller_1" rgba="${wheel_rgba}"/>
+
+  <!-- tracks touch the ground -->
+  <xacro:gz_friction link="${side}_track_1" mu="1.0"/>
+  <xacro:gz_friction link="front_${side}_sprocket_1" mu="1.0"/>
+  <xacro:gz_friction link="rear_${side}_sprocket_1" mu="1.0"/>
+  <xacro:gz_friction link="front_${side}_road_wheel_1" mu="1.0"/>
+  <xacro:gz_friction link="middle_${side}_road_wheel_1" mu="1.0"/>
+  <xacro:gz_friction link="rear_${side}_road_wheel_1" mu="1.0"/>
 </xacro:macro>
 
-<xacro:gz_wheels side="left"/>
-<xacro:gz_wheels side="right"/>
+<xacro:gz_side side="left"/>
+<xacro:gz_side side="right"/>
 
 <!-- publish joint states so RViz can show the robot while Gazebo runs -->
 <gazebo>
