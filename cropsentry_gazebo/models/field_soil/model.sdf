@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="field_soil">
+    <static>true</static>
+    <link name="link">
+      <!-- only a visual, the ground plane does the physics -->
+      <visual name="visual">
+        <pose>0 0 0.002 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane><normal>0 0 1</normal><size>13.8 5.8</size></plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://field_soil/materials/scripts</uri>
+            <name>CropSentry/Soil</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
