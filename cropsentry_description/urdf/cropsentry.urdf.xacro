@@ -609,7 +609,7 @@
 
 <link name="front_left_sprocket_1">
   <inertial>
-    <origin xyz="4.3222212595367404e-05 -7.771561172376096e-16 -3.588501754102358e-05" rpy="0 0 0"/>
+    <origin xyz="0 -7.771561172376096e-16 0" rpy="0 0 0"/>
     <mass value="0.17184803025851375"/>
     <inertia ixx="0.000122" iyy="0.000137" izz="0.000122" ixy="-0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
@@ -630,7 +630,7 @@
 
 <link name="rear_left_sprocket_1">
   <inertial>
-    <origin xyz="4.322221259406289e-05 -1.7208456881689926e-15 -3.588501754112072e-05" rpy="0 0 0"/>
+    <origin xyz="0 -1.7208456881689926e-15 0" rpy="0 0 0"/>
     <mass value="0.17184803025851375"/>
     <inertia ixx="0.000122" iyy="0.000137" izz="0.000122" ixy="-0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
@@ -651,7 +651,7 @@
 
 <link name="front_right_sprocket_1">
   <inertial>
-    <origin xyz="-4.322221259339676e-05 1.9262369477246466e-14 -3.588501754206441e-05" rpy="0 0 0"/>
+    <origin xyz="0 1.9262369477246466e-14 0" rpy="0 0 0"/>
     <mass value="0.17184803025851375"/>
     <inertia ixx="0.000122" iyy="0.000137" izz="0.000122" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -672,7 +672,7 @@
 
 <link name="rear_right_sprocket_1">
   <inertial>
-    <origin xyz="-4.322221259356329e-05 5.473399511402022e-14 -3.588501754220319e-05" rpy="0 0 0"/>
+    <origin xyz="0 5.473399511402022e-14 0" rpy="0 0 0"/>
     <mass value="0.17184803025851375"/>
     <inertia ixx="0.000122" iyy="0.000137" izz="0.000122" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -693,7 +693,7 @@
 
 <link name="front_left_road_wheel_1">
   <inertial>
-    <origin xyz="-3.2201240140763976e-05 -0.004177355519237036 0.00015073786728982824" rpy="0 0 0"/>
+    <origin xyz="0 -0.004177355519237036 0" rpy="0 0 0"/>
     <mass value="0.3123087999601298"/>
     <inertia ixx="0.000299" iyy="0.000472" izz="0.000301" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -714,7 +714,7 @@
 
 <link name="middle_left_road_wheel_1">
   <inertial>
-    <origin xyz="3.2806168714016523e-07 -0.004164305949009239 2.686881463570545e-07" rpy="0 0 0"/>
+    <origin xyz="0 -0.004164305949009239 0" rpy="0 0 0"/>
     <mass value="0.3132874733976082"/>
     <inertia ixx="0.000302" iyy="0.000475" izz="0.000302" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -735,7 +735,7 @@
 
 <link name="rear_left_road_wheel_1">
   <inertial>
-    <origin xyz="4.85011332533869e-05 -0.004183389697617779 0.00021924873762715208" rpy="0 0 0"/>
+    <origin xyz="0 -0.004183389697617779 0" rpy="0 0 0"/>
     <mass value="0.311858321485724"/>
     <inertia ixx="0.000298" iyy="0.000471" izz="0.000301" ixy="-0.0" iyz="-0.0" ixz="1e-06"/>
   </inertial>
@@ -756,7 +756,7 @@
 
 <link name="front_right_road_wheel_1">
   <inertial>
-    <origin xyz="-4.850113325172156e-05 0.004183389697643203 0.00021924873762602798" rpy="0 0 0"/>
+    <origin xyz="0 0.004183389697643203 0" rpy="0 0 0"/>
     <mass value="0.311858321485724"/>
     <inertia ixx="0.000298" iyy="0.000471" izz="0.000301" ixy="-0.0" iyz="0.0" ixz="-1e-06"/>
   </inertial>
@@ -777,7 +777,7 @@
 
 <link name="middle_right_road_wheel_1">
   <inertial>
-    <origin xyz="-3.28061685932364e-07 0.004164305949044378 2.6868814528846485e-07" rpy="0 0 0"/>
+    <origin xyz="0 0.004164305949044378 0" rpy="0 0 0"/>
     <mass value="0.3132874733976082"/>
     <inertia ixx="0.000302" iyy="0.000475" izz="0.000302" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -798,7 +798,7 @@
 
 <link name="rear_right_road_wheel_1">
   <inertial>
-    <origin xyz="3.2201240141971343e-05 0.0041773555192822776 0.00015073786728869026" rpy="0 0 0"/>
+    <origin xyz="0 0.0041773555192822776 0" rpy="0 0 0"/>
     <mass value="0.3123087999601298"/>
     <inertia ixx="0.000299" iyy="0.000472" izz="0.000301" ixy="0.0" iyz="0.0" ixz="0.0"/>
   </inertial>
@@ -819,7 +819,7 @@
 
 <link name="front_left_roller_1">
   <inertial>
-    <origin xyz="-1.719383129969443e-07 -0.0027551020408171367 2.6868814642644345e-07" rpy="0 0 0"/>
+    <origin xyz="0 -0.0027551020408171367 0" rpy="0 0 0"/>
     <mass value="0.08697499261463347"/>
     <inertia ixx="3.4e-05" iyy="3.2e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -840,7 +840,7 @@
 
 <link name="rear_left_roller_1">
   <inertial>
-    <origin xyz="-1.7193831312878327e-07 -0.0027551020408171367 2.686881463986879e-07" rpy="0 0 0"/>
+    <origin xyz="0 -0.0027551020408171367 0" rpy="0 0 0"/>
     <mass value="0.08697499261463347"/>
     <inertia ixx="3.4e-05" iyy="3.2e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -861,7 +861,7 @@
 
 <link name="front_right_roller_1">
   <inertial>
-    <origin xyz="1.7193831421125072e-07 0.002755102040846946 2.6868814539948715e-07" rpy="0 0 0"/>
+    <origin xyz="0 0.002755102040846946 0" rpy="0 0 0"/>
     <mass value="0.08697499261463347"/>
     <inertia ixx="3.4e-05" iyy="3.2e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -882,7 +882,7 @@
 
 <link name="rear_right_roller_1">
   <inertial>
-    <origin xyz="1.7193831405859505e-07 0.0027551020408573823 2.68688145343976e-07" rpy="0 0 0"/>
+    <origin xyz="0 0.0027551020408573823 0" rpy="0 0 0"/>
     <mass value="0.08697499261463347"/>
     <inertia ixx="3.4e-05" iyy="3.2e-05" izz="3.4e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
   </inertial>
@@ -982,6 +982,7 @@
   <parent link="left_side_module_1"/>
   <child link="front_left_sprocket_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
 </joint>
 
 <joint name="rear_left_sprocket_joint" type="continuous">
@@ -989,6 +990,7 @@
   <parent link="left_side_module_1"/>
   <child link="rear_left_sprocket_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_left_sprocket_joint" multiplier="1.0" offset="0"/>
 </joint>
 
@@ -997,6 +999,7 @@
   <parent link="right_side_module_1"/>
   <child link="front_right_sprocket_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
 </joint>
 
 <joint name="rear_right_sprocket_joint" type="continuous">
@@ -1004,6 +1007,7 @@
   <parent link="right_side_module_1"/>
   <child link="rear_right_sprocket_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_right_sprocket_joint" multiplier="1.0" offset="0"/>
 </joint>
 
@@ -1012,6 +1016,7 @@
   <parent link="left_side_module_1"/>
   <child link="front_left_road_wheel_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_left_sprocket_joint" multiplier="1.17" offset="0"/>
 </joint>
 
@@ -1020,6 +1025,7 @@
   <parent link="left_side_module_1"/>
   <child link="middle_left_road_wheel_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_left_sprocket_joint" multiplier="1.17" offset="0"/>
 </joint>
 
@@ -1028,6 +1034,7 @@
   <parent link="left_side_module_1"/>
   <child link="rear_left_road_wheel_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_left_sprocket_joint" multiplier="1.17" offset="0"/>
 </joint>
 
@@ -1036,6 +1043,7 @@
   <parent link="right_side_module_1"/>
   <child link="front_right_road_wheel_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_right_sprocket_joint" multiplier="1.17" offset="0"/>
 </joint>
 
@@ -1044,6 +1052,7 @@
   <parent link="right_side_module_1"/>
   <child link="middle_right_road_wheel_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_right_sprocket_joint" multiplier="1.17" offset="0"/>
 </joint>
 
@@ -1052,6 +1061,7 @@
   <parent link="right_side_module_1"/>
   <child link="rear_right_road_wheel_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_right_sprocket_joint" multiplier="1.17" offset="0"/>
 </joint>
 
@@ -1060,6 +1070,7 @@
   <parent link="left_side_module_1"/>
   <child link="front_left_roller_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_left_sprocket_joint" multiplier="2.34" offset="0"/>
 </joint>
 
@@ -1068,6 +1079,7 @@
   <parent link="left_side_module_1"/>
   <child link="rear_left_roller_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_left_sprocket_joint" multiplier="2.34" offset="0"/>
 </joint>
 
@@ -1076,6 +1088,7 @@
   <parent link="right_side_module_1"/>
   <child link="front_right_roller_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_right_sprocket_joint" multiplier="2.34" offset="0"/>
 </joint>
 
@@ -1084,6 +1097,7 @@
   <parent link="right_side_module_1"/>
   <child link="rear_right_roller_1"/>
   <axis xyz="0 1 0"/>
+  <dynamics damping="0.02"/>
   <mimic joint="front_right_sprocket_joint" multiplier="2.34" offset="0"/>
 </joint>
 
