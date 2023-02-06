@@ -3,7 +3,7 @@
   <world name="crop_field">
     <!-- plot A: low strawberry beds, the robot passes at its smallest size.
          plot B: bigger plants, the robot has to widen and lift first.
-         the robot starts at the origin facing the middle row of both plots. -->
+         both plots have 5 rows. the robot starts at the origin, in the headland west of plot A. -->
 
     <include>
       <uri>model://sun</uri>
@@ -65,11 +65,24 @@
     <model name="strawberry_beds">
       <static>true</static>
       <link name="link">
-        <collision name="bed_right">
+        <collision name="bed_1">
+          <pose>2.65 -1.6 0.02 0 0 0</pose>
+          <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
+        </collision>
+        <visual name="bed_1">
+          <pose>2.65 -1.6 0.02 0 0 0</pose>
+          <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
+          <material>
+            <ambient>0.06 0.06 0.06 1</ambient>
+            <diffuse>0.06 0.06 0.06 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+          </material>
+        </visual>
+        <collision name="bed_2">
           <pose>2.65 -0.8 0.02 0 0 0</pose>
           <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
         </collision>
-        <visual name="bed_right">
+        <visual name="bed_2">
           <pose>2.65 -0.8 0.02 0 0 0</pose>
           <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
           <material>
@@ -78,11 +91,11 @@
             <specular>0.3 0.3 0.3 1</specular>
           </material>
         </visual>
-        <collision name="bed_middle">
+        <collision name="bed_3">
           <pose>2.65 0 0.02 0 0 0</pose>
           <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
         </collision>
-        <visual name="bed_middle">
+        <visual name="bed_3">
           <pose>2.65 0 0.02 0 0 0</pose>
           <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
           <material>
@@ -91,12 +104,25 @@
             <specular>0.3 0.3 0.3 1</specular>
           </material>
         </visual>
-        <collision name="bed_left">
+        <collision name="bed_4">
           <pose>2.65 0.8 0.02 0 0 0</pose>
           <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
         </collision>
-        <visual name="bed_left">
+        <visual name="bed_4">
           <pose>2.65 0.8 0.02 0 0 0</pose>
+          <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
+          <material>
+            <ambient>0.06 0.06 0.06 1</ambient>
+            <diffuse>0.06 0.06 0.06 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+          </material>
+        </visual>
+        <collision name="bed_5">
+          <pose>2.65 1.6 0.02 0 0 0</pose>
+          <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
+        </collision>
+        <visual name="bed_5">
+          <pose>2.65 1.6 0.02 0 0 0</pose>
           <geometry><box><size>3.9 0.3 0.04</size></box></geometry>
           <material>
             <ambient>0.06 0.06 0.06 1</ambient>
@@ -108,93 +134,139 @@
     </model>
 
     <!-- plot A row 1 -->
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_1</name><pose>1.0 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_2</name><pose>1.3 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_3</name><pose>1.6 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_4</name><pose>1.9 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_5</name><pose>2.2 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_6</name><pose>2.5 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_7</name><pose>2.8 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_8</name><pose>3.1 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_9</name><pose>3.4 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_10</name><pose>3.7 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_11</name><pose>4.0 -0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_1_12</name><pose>4.3 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_1</name><pose>1.0 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_2</name><pose>1.3 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_3</name><pose>1.6 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_4</name><pose>1.9 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_5</name><pose>2.2 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_6</name><pose>2.5 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_7</name><pose>2.8 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_8</name><pose>3.1 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_9</name><pose>3.4 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_10</name><pose>3.7 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_11</name><pose>4.0 -1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_1_12</name><pose>4.3 -1.6 0.04 0 0 0</pose></include>
     <!-- plot A row 2 -->
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_1</name><pose>1.0 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_2</name><pose>1.3 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_3</name><pose>1.6 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_4</name><pose>1.9 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_5</name><pose>2.2 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_6</name><pose>2.5 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_7</name><pose>2.8 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_8</name><pose>3.1 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_9</name><pose>3.4 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_10</name><pose>3.7 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_11</name><pose>4.0 0.0 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_2_12</name><pose>4.3 0.0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_1</name><pose>1.0 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_2</name><pose>1.3 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_3</name><pose>1.6 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_4</name><pose>1.9 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_5</name><pose>2.2 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_6</name><pose>2.5 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_7</name><pose>2.8 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_8</name><pose>3.1 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_9</name><pose>3.4 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_10</name><pose>3.7 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_11</name><pose>4.0 -0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_2_12</name><pose>4.3 -0.8 0.04 0 0 0</pose></include>
     <!-- plot A row 3 -->
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_1</name><pose>1.0 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_2</name><pose>1.3 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_3</name><pose>1.6 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_4</name><pose>1.9 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_5</name><pose>2.2 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_6</name><pose>2.5 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_7</name><pose>2.8 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_8</name><pose>3.1 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_9</name><pose>3.4 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_10</name><pose>3.7 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_11</name><pose>4.0 0.8 0.04 0 0 0</pose></include>
-    <include><uri>model://strawberry_plant</uri><name>strawberry_3_12</name><pose>4.3 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_1</name><pose>1.0 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_2</name><pose>1.3 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_3</name><pose>1.6 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_4</name><pose>1.9 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_5</name><pose>2.2 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_6</name><pose>2.5 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_7</name><pose>2.8 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_8</name><pose>3.1 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_9</name><pose>3.4 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_10</name><pose>3.7 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_11</name><pose>4.0 0 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_3_12</name><pose>4.3 0 0.04 0 0 0</pose></include>
+    <!-- plot A row 4 -->
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_1</name><pose>1.0 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_2</name><pose>1.3 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_3</name><pose>1.6 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_4</name><pose>1.9 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_5</name><pose>2.2 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_6</name><pose>2.5 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_7</name><pose>2.8 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_8</name><pose>3.1 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_9</name><pose>3.4 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_10</name><pose>3.7 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_11</name><pose>4.0 0.8 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_4_12</name><pose>4.3 0.8 0.04 0 0 0</pose></include>
+    <!-- plot A row 5 -->
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_1</name><pose>1.0 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_2</name><pose>1.3 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_3</name><pose>1.6 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_4</name><pose>1.9 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_5</name><pose>2.2 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_6</name><pose>2.5 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_7</name><pose>2.8 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_8</name><pose>3.1 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_9</name><pose>3.4 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_10</name><pose>3.7 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_11</name><pose>4.0 1.6 0.04 0 0 0</pose></include>
+    <include><uri>model://strawberry_plant</uri><name>strawberry_5_12</name><pose>4.3 1.6 0.04 0 0 0</pose></include>
     <!-- plot B row 1 -->
-    <include><uri>model://tall_plant</uri><name>tall_1_1</name><pose>6.5 -1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_1_2</name><pose>7.0 -1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_1_3</name><pose>7.5 -1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_1_4</name><pose>8.0 -1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_1_5</name><pose>8.5 -1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_1_6</name><pose>9.0 -1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_1_7</name><pose>9.5 -1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_1_8</name><pose>10.0 -1.0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_1_1</name><pose>6.5 -2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_1_2</name><pose>7.0 -2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_1_3</name><pose>7.5 -2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_1_4</name><pose>8.0 -2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_1_5</name><pose>8.5 -2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_1_6</name><pose>9.0 -2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_1_7</name><pose>9.5 -2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_1_8</name><pose>10.0 -2 0 0 0 0</pose></include>
     <!-- plot B row 2 -->
-    <include><uri>model://tall_plant</uri><name>tall_2_1</name><pose>6.5 0.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_2_2</name><pose>7.0 0.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_2_3</name><pose>7.5 0.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_2_4</name><pose>8.0 0.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_2_5</name><pose>8.5 0.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_2_6</name><pose>9.0 0.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_2_7</name><pose>9.5 0.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_2_8</name><pose>10.0 0.0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_2_1</name><pose>6.5 -1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_2_2</name><pose>7.0 -1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_2_3</name><pose>7.5 -1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_2_4</name><pose>8.0 -1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_2_5</name><pose>8.5 -1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_2_6</name><pose>9.0 -1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_2_7</name><pose>9.5 -1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_2_8</name><pose>10.0 -1 0 0 0 0</pose></include>
     <!-- plot B row 3 -->
-    <include><uri>model://tall_plant</uri><name>tall_3_1</name><pose>6.5 1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_3_2</name><pose>7.0 1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_3_3</name><pose>7.5 1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_3_4</name><pose>8.0 1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_3_5</name><pose>8.5 1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_3_6</name><pose>9.0 1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_3_7</name><pose>9.5 1.0 0 0 0 0</pose></include>
-    <include><uri>model://tall_plant</uri><name>tall_3_8</name><pose>10.0 1.0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_3_1</name><pose>6.5 0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_3_2</name><pose>7.0 0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_3_3</name><pose>7.5 0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_3_4</name><pose>8.0 0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_3_5</name><pose>8.5 0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_3_6</name><pose>9.0 0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_3_7</name><pose>9.5 0 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_3_8</name><pose>10.0 0 0 0 0 0</pose></include>
+    <!-- plot B row 4 -->
+    <include><uri>model://tall_plant</uri><name>tall_4_1</name><pose>6.5 1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_4_2</name><pose>7.0 1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_4_3</name><pose>7.5 1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_4_4</name><pose>8.0 1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_4_5</name><pose>8.5 1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_4_6</name><pose>9.0 1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_4_7</name><pose>9.5 1 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_4_8</name><pose>10.0 1 0 0 0 0</pose></include>
+    <!-- plot B row 5 -->
+    <include><uri>model://tall_plant</uri><name>tall_5_1</name><pose>6.5 2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_5_2</name><pose>7.0 2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_5_3</name><pose>7.5 2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_5_4</name><pose>8.0 2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_5_5</name><pose>8.5 2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_5_6</name><pose>9.0 2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_5_7</name><pose>9.5 2 0 0 0 0</pose></include>
+    <include><uri>model://tall_plant</uri><name>tall_5_8</name><pose>10.0 2 0 0 0 0</pose></include>
 
-    <!-- fence, 14 m by 6 m, built from 2 m sections going round anticlockwise -->
-    <include><uri>model://fence_section</uri><name>fence_south_1</name><pose>-1 -3 0 0 0 0</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_south_2</name><pose>1 -3 0 0 0 0</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_south_3</name><pose>3 -3 0 0 0 0</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_south_4</name><pose>5 -3 0 0 0 0</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_south_5</name><pose>7 -3 0 0 0 0</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_south_6</name><pose>9 -3 0 0 0 0</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_south_7</name><pose>11 -3 0 0 0 0</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_east_1</name><pose>12 -2 0 0 0 1.5708</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_east_2</name><pose>12 0 0 0 0 1.5708</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_east_3</name><pose>12 2 0 0 0 1.5708</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_north_1</name><pose>11 3 0 0 0 3.1416</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_north_2</name><pose>9 3 0 0 0 3.1416</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_north_3</name><pose>7 3 0 0 0 3.1416</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_north_4</name><pose>5 3 0 0 0 3.1416</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_north_5</name><pose>3 3 0 0 0 3.1416</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_north_6</name><pose>1 3 0 0 0 3.1416</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_north_7</name><pose>-1 3 0 0 0 3.1416</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_west_1</name><pose>-2 2 0 0 0 -1.5708</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_west_2</name><pose>-2 0 0 0 0 -1.5708</pose></include>
-    <include><uri>model://fence_section</uri><name>fence_west_3</name><pose>-2 -2 0 0 0 -1.5708</pose></include>
+    <!-- fence, 14 m by 8 m, built from 2 m sections going round anticlockwise -->
+    <include><uri>model://fence_section</uri><name>fence_south_1</name><pose>-1 -4 0 0 0 0</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_south_2</name><pose>1 -4 0 0 0 0</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_south_3</name><pose>3 -4 0 0 0 0</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_south_4</name><pose>5 -4 0 0 0 0</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_south_5</name><pose>7 -4 0 0 0 0</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_south_6</name><pose>9 -4 0 0 0 0</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_south_7</name><pose>11 -4 0 0 0 0</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_east_1</name><pose>12 -3 0 0 0 1.5708</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_east_2</name><pose>12 -1 0 0 0 1.5708</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_east_3</name><pose>12 1 0 0 0 1.5708</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_east_4</name><pose>12 3 0 0 0 1.5708</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_north_1</name><pose>11 4 0 0 0 3.1416</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_north_2</name><pose>9 4 0 0 0 3.1416</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_north_3</name><pose>7 4 0 0 0 3.1416</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_north_4</name><pose>5 4 0 0 0 3.1416</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_north_5</name><pose>3 4 0 0 0 3.1416</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_north_6</name><pose>1 4 0 0 0 3.1416</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_north_7</name><pose>-1 4 0 0 0 3.1416</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_west_1</name><pose>-2 3 0 0 0 -1.5708</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_west_2</name><pose>-2 1 0 0 0 -1.5708</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_west_3</name><pose>-2 -1 0 0 0 -1.5708</pose></include>
+    <include><uri>model://fence_section</uri><name>fence_west_4</name><pose>-2 -3 0 0 0 -1.5708</pose></include>
 
     <!-- around the field -->
     <include><uri>model://tool_shed</uri><name>tool_shed</name><pose>-5 -1 0 0 0 0</pose></include>
@@ -210,7 +282,7 @@
 
     <gui>
       <camera name="user_camera">
-        <pose>-4.5 -7.5 5.0 0 0.42 0.68</pose>
+        <pose>-4.0 -8.5 8.0 0 0.62 0.78</pose>
       </camera>
     </gui>
   </world>
