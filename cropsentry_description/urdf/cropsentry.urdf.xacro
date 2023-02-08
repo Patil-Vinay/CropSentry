@@ -977,6 +977,48 @@
   <child link="lidar_link_1"/>
 </joint>
 
+<!-- BNO055 on top of the lid, far from the motors so the magnetometer gives a usable heading -->
+<link name="imu_link">
+  <inertial>
+    <mass value="0.01"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="1e-06" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0.002" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.027 0.02 0.004"/>
+    </geometry>
+    <material name="pcb_blue"/>
+  </visual>
+</link>
+
+<joint name="imu_joint" type="fixed">
+  <origin xyz="-0.05 0 0.5867" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="imu_link"/>
+</joint>
+
+<!-- NEO-M8N GPS puck at the back of the lid -->
+<link name="gps_link">
+  <inertial>
+    <mass value="0.05"/>
+    <inertia ixx="1e-05" iyy="1e-05" izz="1e-05" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0.007" rpy="0 0 0"/>
+    <geometry>
+      <cylinder radius="0.03" length="0.014"/>
+    </geometry>
+    <material name="gps_black"/>
+  </visual>
+</link>
+
+<joint name="gps_joint" type="fixed">
+  <origin xyz="-0.15 0 0.5867" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="gps_link"/>
+</joint>
+
 <joint name="front_left_sprocket_joint" type="continuous">
   <origin xyz="0.227011 0 0.111374" rpy="0 0 0"/>
   <parent link="left_side_module_1"/>

@@ -18,6 +18,8 @@
 <xacro:property name="wheel_rgba" value="0.86 0.86 0.86 1"/>
 <xacro:property name="camera_rgba" value="0.1 0.1 0.1 1"/>
 <xacro:property name="lidar_rgba" value="0.2 0.2 0.22 1"/>
+<xacro:property name="pcb_rgba" value="0.1 0.25 0.55 1"/>
+<xacro:property name="gps_rgba" value="0.12 0.12 0.12 1"/>
 
 <material name="aluminium"><color rgba="${aluminium_rgba}"/></material>
 <material name="gantry_black"><color rgba="${gantry_rgba}"/></material>
@@ -35,5 +37,7 @@
 <material name="wheel_white"><color rgba="${wheel_rgba}"/></material>
 <material name="camera_black"><color rgba="${camera_rgba}"/></material>
 <material name="lidar_dark"><color rgba="${lidar_rgba}"/></material>
+<material name="pcb_blue"><color rgba="${pcb_rgba}"/></material>
+<material name="gps_black"><color rgba="${gps_rgba}"/></material>
 
 </robot>

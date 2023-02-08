@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<!-- Gazebo 11 gives one material to a whole link, so every coloured part
-     is its own link in the URDF. Gazebo merges the fixed links back but keeps
-     each part's colour. the box and side plates use a wood texture. -->
+<!-- one link per colour, gazebo classic only does one material per link -->
 
 <xacro:macro name="gz_colour" params="link rgba">
   <gazebo reference="${link}">
@@ -46,6 +44,8 @@
 <xacro:gz_colour link="camera_front_link_1" rgba="${camera_rgba}"/>
 <xacro:gz_colour link="camera_rear_link_1" rgba="${camera_rgba}"/>
 <xacro:gz_colour link="lidar_link_1" rgba="${lidar_rgba}"/>
+<xacro:gz_colour link="imu_link" rgba="${pcb_rgba}"/>
+<xacro:gz_colour link="gps_link" rgba="${gps_rgba}"/>
 
 <xacro:macro name="gz_side" params="side">
   <xacro:gz_colour link="${side}_side_rail_1" rgba="${aluminium_rgba}"/>
@@ -78,6 +78,58 @@
 
 <xacro:gz_side side="left"/>
 <xacro:gz_side side="right"/>
+
+<!-- BNO055, noise roughly from its datasheet. orientation is absolute like the
+     fused BNO055 output, so yaw 0 is east -->
+<gazebo reference="imu_link">
+  <sensor name="imu" type="imu">
+    <always_on>true</always_on>
+    <update_rate>100</update_rate>
+    <imu>
+      <angular_velocity>
+        <x><noise type="gaussian"><mean>0</mean><stddev>0.0025</stddev></noise></x>
+        <y><noise type="gaussian"><mean>0</mean><stddev>0.0025</stddev></noise></y>
+        <z><noise type="gaussian"><mean>0</mean><stddev>0.0025</stddev></noise></z>
+      </angular_velocity>
+      <linear_acceleration>
+        <x><noise type="gaussian"><mean>0</mean><stddev>0.015</stddev></noise></x>
+        <y><noise type="gaussian"><mean>0</mean><stddev>0.015</stddev></noise></y>
+        <z><noise type="gaussian"><mean>0</mean><stddev>0.015</stddev></noise></z>
+      </linear_acceleration>
+    </imu>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
+      <ros>
+        <remapping>~/out:=imu/data</remapping>
+      </ros>
+      <frame_name>imu_link</frame_name>
+      <initial_orientation_as_reference>false</initial_orientation_as_reference>
+    </plugin>
+  </sensor>
+</gazebo>
+
+<!-- u-blox NEO-M8N. datasheet says 2.5 m CEP, so about 2.1 m per axis -->
+<gazebo reference="gps_link">
+  <sensor name="gps" type="gps">
+    <always_on>true</always_on>
+    <update_rate>5</update_rate>
+    <gps>
+      <position_sensing>
+        <horizontal><noise type="gaussian"><mean>0</mean><stddev>2.1</stddev></noise></horizontal>
+        <vertical><noise type="gaussian"><mean>0</mean><stddev>3.5</stddev></noise></vertical>
+      </position_sensing>
+      <velocity_sensing>
+        <horizontal><noise type="gaussian"><mean>0</mean><stddev>0.05</stddev></noise></horizontal>
+        <vertical><noise type="gaussian"><mean>0</mean><stddev>0.05</stddev></noise></vertical>
+      </velocity_sensing>
+    </gps>
+    <plugin name="gps_plugin" filename="libgazebo_ros_gps_sensor.so">
+      <ros>
+        <remapping>~/out:=gps/fix</remapping>
+      </ros>
+      <frame_name>gps_link</frame_name>
+    </plugin>
+  </sensor>
+</gazebo>
 
 <!-- publish joint states so RViz can show the robot while Gazebo runs -->
 <gazebo>
